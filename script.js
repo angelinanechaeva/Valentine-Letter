@@ -69,4 +69,38 @@ yesBtn.addEventListener("click", () => {
     buttons.style.display = "none";
 
     finalText.style.display = "block";
+
+    const heartImages = ['heart1.png', 'heart2.png', 'heart3.png'];
+    
+    function createOneHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'falling-heart';
+        
+        const randomHeart = heartImages[Math.floor(Math.random() * heartImages.length)];
+        heart.style.backgroundImage = `url("${randomHeart}")`;
+        
+        const randomSize = 30 + Math.random() * 20;
+        heart.style.width = `${randomSize}px`;
+        heart.style.height = `${randomSize}px`;
+        
+        heart.style.left = `${Math.random() * 100}vw`;
+        
+        const fallDuration = 3 + Math.random() * 3;
+        heart.style.animation = `heart-fall ${fallDuration}s linear forwards`;
+        
+        heart.style.animationDelay = `${Math.random() * 2}s`;
+        
+        document.body.appendChild(heart);
+        
+        setTimeout(() => {
+            if (heart.parentNode) {
+                heart.remove();
+            }
+        }, (fallDuration + 2) * 1000); 
+    }
+    
+    for (let i = 0; i < 50; i++) {
+        setTimeout(createOneHeart, i * 150); 
+    }
 });
+
